@@ -54,6 +54,7 @@ template = ERB.new <<~EOF
   class PaperAge < Formula
     desc "Easy and secure paper backups of secrets"
     homepage "https://github.com/matiaskorhonen/paper-age"
+    license "MIT
 
     url "<%= macos_universal_url %>"
     sha256 "<%= macos_universal_sha256 %>"
@@ -69,9 +70,6 @@ template = ERB.new <<~EOF
         sha256 "<%= linux_x86_64_sha256 %>"
       end
     end
-
-    version "<%= version %>"
-    license "MIT"
 
     def install
       bin.install "paper-age"

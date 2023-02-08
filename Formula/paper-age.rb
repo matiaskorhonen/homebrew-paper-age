@@ -1,6 +1,7 @@
 class PaperAge < Formula
   desc "Easy and secure paper backups of secrets"
   homepage "https://github.com/matiaskorhonen/paper-age"
+  license "MIT
 
   url "https://github.com/matiaskorhonen/paper-age/releases/download/v1.0.1/paper-age-universal-apple-darwin.tar.gz"
   sha256 "cad2b85e5df6b01388c185993062300deb177a9d2b56be478d2db7baf9b30d4f"
@@ -16,9 +17,6 @@ class PaperAge < Formula
       sha256 "ab0d15ca6bc39e1b09108fcc4cca14a57979260a6dd625475451f680f759b5b1"
     end
   end
-
-  version "1.0.1"
-  license "MIT"
 
   def install
     bin.install "paper-age"
