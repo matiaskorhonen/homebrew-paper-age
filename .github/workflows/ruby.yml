@@ -1,6 +1,7 @@
 name: Ruby
 
 on:
+  push:
   workflow_dispatch:
     inputs:
       version:
@@ -31,7 +32,7 @@ jobs:
         mkdir -p `brew --repo`/Library/Taps/matiaskorhonen
         ln -s `realpath ./` `brew --repo`/Library/Taps/matiaskorhonen/homebrew-paper-age
     - name: Update the formula
-      run: "./bin/update_formula.rb ${{ github.event.inputs.version }}"
+      run: "./bin/update_formula.rb ${{ github.event.inputs.version || "1.0.1" }}"
     - name: Test the formula
       run: |
         eval "$(brew shellenv)"
