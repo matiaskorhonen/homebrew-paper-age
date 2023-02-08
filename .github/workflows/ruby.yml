@@ -7,8 +7,6 @@ on:
         description: "PaperAge release version (e.g. 1.2.3)"
         required: true
   push:
-    branches:
-      - main
 
 permissions:
   contents: write
@@ -34,7 +32,7 @@ jobs:
         mkdir -p `brew --repo`/Library/Taps/matiaskorhonen
         ln -s `realpath ./` `brew --repo`/Library/Taps/matiaskorhonen/homebrew-paper-age
     - name: Update the formula
-      run: "./bin/update_formula.rb ${{ github.event.inputs.version || "1.0.1" }}"
+      run: "./bin/update_formula.rb ${{ github.event.inputs.version || '1.0.1' }}"
     - name: Test the formula
       run: |
         eval "$(brew shellenv)"
