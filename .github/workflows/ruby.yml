@@ -21,6 +21,8 @@ jobs:
       with:
         ruby-version: "3.1"
         bundler-cache: true
+    - name: Set up Homebrew
+      run: NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     - name: Update the formula
       run: "./bin/update_formula.rb ${{ github.event.inputs.version }}"
     - uses: EndBug/add-and-commit@v9
