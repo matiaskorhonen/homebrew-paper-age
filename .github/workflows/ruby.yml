@@ -25,8 +25,6 @@ jobs:
       run: |
         NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         echo "$HOME/.local/bin" >> $GITHUB_PATH
-    - name: Update path
-      run: /home/linuxbrew/.linuxbrew/bin
     - name: Local Tap
       run: |
         eval "$(brew shellenv)"
