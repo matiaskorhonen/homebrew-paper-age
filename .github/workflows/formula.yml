@@ -39,11 +39,11 @@ jobs:
         brew install paper-age
         brew test --debug --force paper-age
     - name: Add and commit
-      if: github.event_name == 'workflow_dispatch' && github.event.ref == 'refs/heads/main'
+      if: github.event_name == 'workflow_dispatch'
       uses: EndBug/add-and-commit@v9
       with:
         add: "./Formula"
         default_author: github_actions
         message: "Update to PaperAge v${{ github.event.inputs.version }}"
-        tag: "${{ github.event.inputs.version }}"
+        tag: ${{ (github.event_name == 'workflow_dispatch' && github.event.ref == 'refs/heads/main') && format('v{}', github.event.inputs.version) || '' }}
         push: true
