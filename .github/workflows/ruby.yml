@@ -29,7 +29,7 @@ jobs:
       run: |
         eval "$(brew shellenv)"
         mkdir -p `brew --repo`/Library/Taps/matiaskorhonen
-        ln -s `realpath ./` `brew --repo`/Library/Taps/matiaskorhonen/paper-age
+        ln -s `realpath ./` `brew --repo`/Library/Taps/matiaskorhonen/homebrew-paper-age
     - name: Update the formula
       run: "./bin/update_formula.rb ${{ github.event.inputs.version }}"
     - uses: EndBug/add-and-commit@v9
@@ -42,4 +42,4 @@ jobs:
     - name: Test the formula
       run: |
         eval "$(brew shellenv)"
-        brew test paper-age
+        brew test --debug --force paper-age
