@@ -28,6 +28,7 @@ jobs:
     - name: Local Tap
       run: |
         eval "$(brew shellenv)"
+        mkdir -p `brew --repo`/Library/Taps/matiaskorhonen
         ln -s `realpath ./` `brew --repo`/Library/Taps/matiaskorhonen/paper-age
     - name: Update the formula
       run: "./bin/update_formula.rb ${{ github.event.inputs.version }}"
