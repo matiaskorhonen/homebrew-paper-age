@@ -55,10 +55,8 @@ template = ERB.new <<~EOF
     desc "Easy and secure paper backups of secrets"
     homepage "https://github.com/matiaskorhonen/paper-age"
 
-    on_macos do
-      url "<%= macos_universal_url %>"
-      sha256 "<%= macos_universal_sha256 %>"
-    end
+    url "<%= macos_universal_url %>"
+    sha256 "<%= macos_universal_sha256 %>"
 
     on_linux do
       on_arm do
@@ -72,8 +70,8 @@ template = ERB.new <<~EOF
       end
     end
 
-    license "MIT"
     version "<%= version %>"
+    license "MIT"
 
     def install
       bin.install "paper-age"
