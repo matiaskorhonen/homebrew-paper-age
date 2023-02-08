@@ -43,7 +43,7 @@ jobs:
     - name: Add and commit (workflow_dispatch)
       if: github.event_name == 'workflow_dispatch'
       uses: EndBug/add-and-commit@v9
-      with: &with_add_and_commit
+      with:
         add: "./Formula"
         default_author: github_actions
         message: "Update to PaperAge v${{ github.event.inputs.version }}"
@@ -53,6 +53,8 @@ jobs:
       if: github.event_name == 'repository_dispatch'
       uses: EndBug/add-and-commit@v9
       with:
-        <<: *with_add_and_commit
+        add: "./Formula"
+        default_author: github_actions
         message: "Update to PaperAge v${{ github.event.client_payload.version }}"
         tag: ${{ (github.event_name == 'repository_dispatch' && github.event.ref == 'refs/heads/main') && format('v{}', github.event.client_payload.version) || '' }}
+        push: true
