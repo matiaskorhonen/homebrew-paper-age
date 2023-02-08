@@ -1,0 +1,24 @@
+name: Ruby
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "PaperAge release version (e.g. 1.2.3)"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        bundler-cache: true
+    - name: Update the formula
+      run: "./bin/update_formula.rb ${{ github.event.inputs.version }}"
