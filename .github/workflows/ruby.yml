@@ -1,12 +1,14 @@
 name: Ruby
 
 on:
-  push:
   workflow_dispatch:
     inputs:
       version:
         description: "PaperAge release version (e.g. 1.2.3)"
         required: true
+  push:
+    branches:
+      - main
 
 permissions:
   contents: write
