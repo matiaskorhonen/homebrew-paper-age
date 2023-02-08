@@ -1,6 +1,6 @@
 # PaperAge Tap
 
-[![Build status](https://github.com/matiaskorhonen/homebrew-paper-age/actions/workflows/formula.yml/badge.svg)](https://github.com/matiaskorhonen/homebrew-paper-age/actions/workflows/formula.yml)
+[![Homebrew Formula build status](https://github.com/matiaskorhonen/homebrew-paper-age/actions/workflows/formula.yml/badge.svg)](https://github.com/matiaskorhonen/homebrew-paper-age/actions/workflows/formula.yml)
 
 The Homebrew tap for [PaperAge](https://github.com/matiaskorhonen/paper-age).
 
