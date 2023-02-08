@@ -8,7 +8,7 @@ on:
         required: true
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   update:
@@ -37,7 +37,9 @@ jobs:
         eval "$(brew shellenv)"
         brew install paper-age
         brew test --debug --force paper-age
-    - uses: EndBug/add-and-commit@v9
+    - name: Add and commit
+      if: (github.event_name == "workflow_dispatch" && github.event.ref == "refs/heads/main")
+      uses: EndBug/add-and-commit@v9
       with:
         add: "./Formula"
         default_author: github_actions
