@@ -42,4 +42,5 @@ jobs:
     - name: Test the formula
       run: |
         eval "$(brew shellenv)"
+        brew install paper-age
         brew test --debug --force paper-age
