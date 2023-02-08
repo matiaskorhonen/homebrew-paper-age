@@ -2,7 +2,7 @@ name: Homebrew Formula
 
 on:
   repository_dispatch:
-    types: [update-formula]
+    types: ["Update Homebrew Formula"]
   workflow_dispatch:
     inputs:
       version:
