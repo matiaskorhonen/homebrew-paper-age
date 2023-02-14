@@ -19,6 +19,11 @@ class PaperAge < Formula
 
   def install
     bin.install "paper-age"
+    man.mkpath
+    man1.install "man/paper-age.1"
+    bash_completion.install "completion/paper-age.bash"
+    zsh_completion.install "completion/_paper-age"
+    fish_completion.install "completion/paper-age.fish"
   end
 
   test do
