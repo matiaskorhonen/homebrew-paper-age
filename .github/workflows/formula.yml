@@ -34,7 +34,7 @@ jobs:
         mkdir -p `brew --repo`/Library/Taps/matiaskorhonen
         ln -s `realpath ./` `brew --repo`/Library/Taps/matiaskorhonen/homebrew-paper-age
     - name: Update the formula
-      run: "./bin/update_formula.rb ${{ github.event.inputs.version || github.event.client_payload.version || '1.0.1' }}"
+      run: "./bin/update_formula.rb ${{ github.event.inputs.version || github.event.client_payload.version || '1.1.0' }}"
     - name: Test the formula
       run: |
         eval "$(brew shellenv)"
