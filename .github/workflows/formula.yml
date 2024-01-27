@@ -15,26 +15,12 @@ permissions:
   contents: write
 
 jobs:
-  gitsign:
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v3
-    - uses: chainguard-dev/actions/setup-gitsign@main
-    - name: Make a test change
-      run: |
-        date >> test.txt
-        git add test.txt
-        git commit -m "Test"
-    - name: Show the commit
-      run: |
-        git show --stat --show-signature HEAD
-
   update:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
+    - uses: chainguard-dev/actions/setup-gitsign@main
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
