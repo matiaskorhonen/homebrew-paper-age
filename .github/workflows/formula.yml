@@ -20,7 +20,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - uses: chainguard-dev/actions/setup-gitsign@main
+    - uses: chainguard-dev/actions/setup-gitsign@01b5d32c57fb6cd0c00c99922043d03c527b10e0
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
