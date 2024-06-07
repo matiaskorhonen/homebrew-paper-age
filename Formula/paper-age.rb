@@ -1,19 +1,19 @@
 class PaperAge < Formula
   desc "Easy and secure paper backups of secrets"
   homepage "https://github.com/matiaskorhonen/paper-age"
-  url "https://github.com/matiaskorhonen/paper-age/releases/download/v1.3.0/paper-age-universal-apple-darwin.tar.gz"
-  sha256 "b91c9c8a23b3854531b37e4d9b23ea066cc2e15171795a2293c990c7de00659a"
+  url "https://github.com/matiaskorhonen/paper-age/releases/download/v1.3.1/paper-age-universal-apple-darwin.tar.gz"
+  sha256 "a2ec8b39a012aab4a094a1b01fa01729f9fe936209b2b0ea179fd1a45c2674f7"
   license "MIT"
 
   on_linux do
     on_arm do
-      url "https://github.com/matiaskorhonen/paper-age/releases/download/v1.3.0/paper-age-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "74fc30ae95b4271d6d7b12922e0c5938b2de052a16ce3bb993e4dea8c508f335"
+      url "https://github.com/matiaskorhonen/paper-age/releases/download/v1.3.1/paper-age-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "a31c3105ecc9658200fcb9387170662f1e1069c96e8fd3af380283cac2c9a9cd"
     end
 
     on_intel do
-      url "https://github.com/matiaskorhonen/paper-age/releases/download/v1.3.0/paper-age-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "978fb17e94b18b5addcde867700ec73419954daffd706046e13a5f5d1b2ad154"
+      url "https://github.com/matiaskorhonen/paper-age/releases/download/v1.3.1/paper-age-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "8851340019aea97d08f9c967647f401e1b868aec11d8e0bf4a96eb44f4a8f747"
     end
   end
 
