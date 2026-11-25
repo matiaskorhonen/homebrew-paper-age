@@ -19,13 +19,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
-    - uses: chainguard-dev/actions/setup-gitsign@01b5d32c57fb6cd0c00c99922043d03c527b10e0
+    - uses: actions/checkout@v7
+    - uses: chainguard-dev/actions/setup-gitsign@c66754a60e304cf975e46082140547262fbe76f4
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: "3.1"
+        ruby-version: "4.0"
         bundler-cache: true
+    - name: Resolve the version
+      env:
+        GH_TOKEN: ${{ github.token }}
+        INPUT_VERSION: ${{ github.event.inputs.version || github.event.client_payload.version }}
+      run: |
+        # On push, test against the latest PaperAge release
+        VERSION="${INPUT_VERSION:-$(gh release view --repo matiaskorhonen/paper-age --json tagName --jq .tagName)}"
+        VERSION="${VERSION#v}"
+        if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          echo "::error::Invalid version: $VERSION"
+          exit 1
+        fi
+        echo "VERSION=$VERSION" >> "$GITHUB_ENV"
     - name: Set up Homebrew
       run: |
         NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -36,29 +49,19 @@ jobs:
         mkdir -p `brew --repo`/Library/Taps/matiaskorhonen
         ln -s `realpath ./` `brew --repo`/Library/Taps/matiaskorhonen/homebrew-paper-age
     - name: Update the formula
-      run: "./bin/update_formula.rb ${{ github.event.inputs.version || github.event.client_payload.version || '1.1.0' }}"
+      run: ./bin/update_formula.rb "$VERSION"
     - name: Test the formula
       run: |
         eval "$(brew shellenv)"
         brew install paper-age
         brew test --debug --force paper-age
-    - name: Add and commit (workflow_dispatch)
-      if: github.event_name == 'workflow_dispatch'
-      uses: EndBug/add-and-commit@v9
+    - name: Add and commit
+      if: github.event_name != 'push'
+      uses: EndBug/add-and-commit@v11
       with:
         add: "./Formula"
         default_author: github_actions
-        message: "Update to PaperAge v${{ github.event.inputs.version }}"
-        tag: ${{ format('v{0} --force', github.event.inputs.version) }}
-        tag_push: "--force"
-        push: true
-    - name: Add and commit (repository_dispatch)
-      if: github.event_name == 'repository_dispatch'
-      uses: EndBug/add-and-commit@v9
-      with:
-        add: "./Formula"
-        default_author: github_actions
-        message: "Update to PaperAge v${{ github.event.client_payload.version }}"
-        tag: ${{ format('v{0} --force', github.event.client_payload.version) }}
+        message: "Update to PaperAge v${{ env.VERSION }}"
+        tag: "v${{ env.VERSION }} --force"
         tag_push: "--force"
         push: true

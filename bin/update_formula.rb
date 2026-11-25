@@ -84,7 +84,7 @@ template = ERB.new <<~EOF
       with_env(PAPERAGE_PASSPHRASE: "snakeoil") do
         system bin/"paper-age", "--output", testpath/"output.pdf", testpath/"sample.txt"
       end
-      assert_predicate testpath/"output.pdf", :exist?
+      assert_path_exists testpath/"output.pdf"
     end
   end
 EOF

@@ -2,7 +2,7 @@
 
 source "https://rubygems.org"
 
-ruby "~> 3.1.0"
+ruby "~> 4.0.0"
 
 gem "http"
 gem "addressable"
