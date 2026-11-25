@@ -97,6 +97,7 @@ jobs:
         author_name: ${{ env.BOT_NAME }}
         author_email: ${{ env.BOT_EMAIL }}
         message: "Update to PaperAge v${{ env.VERSION }}"
-        tag: "v${{ env.VERSION }} --force"
+        # setup-gitsign sets tag.gpgsign, so the tag is signed and needs a message
+        tag: "v${{ env.VERSION }} -m 'PaperAge v${{ env.VERSION }}' --force"
         tag_push: "--force"
         push: true
