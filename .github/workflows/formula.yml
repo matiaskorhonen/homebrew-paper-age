@@ -18,6 +18,12 @@ permissions:
   id-token: write
   contents: read
 
+# Queue release runs so two can't commit and force-push the tag at once.
+# Push runs only test, so each gets its own group.
+concurrency:
+  group: ${{ github.event_name == 'push' && format('push-{0}', github.run_id) || 'release' }}
+  cancel-in-progress: false
+
 jobs:
   update:
     runs-on: ubuntu-latest
@@ -36,6 +42,8 @@ jobs:
         # Push runs don't commit, so they don't need the app token
         token: ${{ steps.app-token.outputs.token || github.token }}
     - uses: chainguard-dev/actions/setup-gitsign@c66754a60e304cf975e46082140547262fbe76f4
+      # Only needed to sign the release commit
+      if: github.event_name != 'push'
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
@@ -56,7 +64,8 @@ jobs:
         echo "VERSION=$VERSION" >> "$GITHUB_ENV"
     - name: Set up Homebrew
       run: |
-        NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        # Pinned to a Homebrew/install commit rather than HEAD
+        NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/870ddff5dbe61d293a8b4a763090d125e59048a1/install.sh)"
         echo "/home/linuxbrew/.linuxbrew/bin" >> $GITHUB_PATH
     - name: Local Tap
       run: |
